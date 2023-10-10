@@ -1,0 +1,134 @@
+/* Add styles for the timeline line */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mt_200px {
+  margin-top: 200px !important;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 1.6;
+}
+
+.webContent {
+  max-width: 800px;
+  width: 100%;
+  margin-inline: auto;
+  font-size: 16px;
+  line-height: 1.6;
+  padding-inline: 10px;
+}
+
+.timeline-line {
+  width: 2px;
+  height: 0px;
+  background-color: #333;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  transition: height 1s linear;
+}
+.timeline-line::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #333;
+  border-radius: 50%;
+  bottom: 0;
+  left: -9px;
+}
+
+.timeline-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative; /* Added for positioning the line */
+  padding-block: 150px;
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  -moz-column-gap: 50px;
+  column-gap: 50px;
+  row-gap: 20px;
+  align-items: flex-start;
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+}
+
+.timeline-item {
+  flex: 40%;
+  padding: 20px;
+  margin: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.5s;
+}
+.timeline-item::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background-color: #333;
+  border-radius: 60%;
+  position: absolute;
+}
+.timeline-item:nth-child(even)::before {
+  right: -45px;
+  top: 0;
+}
+.timeline-item:nth-child(odd)::before {
+  left: -45px;
+  top: 0;
+}
+
+.timeline-item.left {
+  transform: translateX(-50px);
+  transition-delay: 0.5s;
+}
+.timeline-item.right {
+  transform: translateX(50px);
+  transition-delay: 0.5s;
+}
+
+@media (max-width: 768px) {
+  .timeline-item.left,
+  .timeline-item.right {
+    transform: translateX(50px);
+  }
+
+  .timeline {
+    max-width: 575px;
+    padding-left: 30px;
+    grid-template-columns: 1fr;
+    padding-bottom: 30px;
+  }
+
+  .mt_200px {
+    margin-top: 0 !important;
+  }
+
+  .timeline-line {
+    left: 20px;
+  }
+
+  .timeline-item:nth-child(even)::before,
+  .timeline-item:nth-child(odd)::before {
+    left: -30px;
+    top: 5px;
+  }
+}
